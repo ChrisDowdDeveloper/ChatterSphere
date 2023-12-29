@@ -1,0 +1,43 @@
+**Project: Real-time Chat Application**
+
+   - **Backend**: Node.js with Express.
+   - **Database**: MongoDB.
+   - **Frontend**: Vue.js.
+
+- **Additional Technologies**:
+    - Use Socket.io for real-time bi-directional communication.
+    - Implement JWT for user authentication.
+    - Consider Redis for managing user sessions in real-time.
+    - Deploy using a service like Heroku for simplicity, or AWS for more scalability.
+
+
+-***Database Tables***
+   *** Users ***
+      - _id : UUID
+      - username : String, Unique
+      - email : String, Unique
+      - password : String
+      - createdAt : Date
+      - lastLogin : Date
+      - profile : Object
+   
+   *** Messages ***
+      - _id : UUID
+      - senderId : ObjectId
+      - chatroomId : ObjectId
+      - content : String
+      - createdAt : Date
+      - seenBy : Array of ObjectIds
+   
+   *** Chatrooms ***
+      - _id : UUID
+      - name : String
+      - participants : Array of ObjectIds
+      - createdAt : Date
+      - lastActivity : Date
+   
+   *** Sessions ***
+      - sessionId : String, Unique
+      - userId : ObjectId
+      - createdAt : Date
+      - expiresAt : Date
