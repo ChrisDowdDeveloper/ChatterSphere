@@ -6,6 +6,11 @@ const createMessage = async(messageData) => {
     return message;
 }
 
+const listAllMessages = async(username, chatroomName) => {
+    return await Message.find(username, chatroomName)
+}
 
 
-module.exports = { createMessage }
+
+
+module.exports = { createMessage, listAllMessages }

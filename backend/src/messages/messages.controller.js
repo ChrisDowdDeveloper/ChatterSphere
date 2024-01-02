@@ -12,4 +12,15 @@ const createMessage = async(req, res) => {
     }
 }
 
-module.exports = { createMessage };
+const listAllMessages = async(req, res) => {
+    try {
+        const username = req.params.username;
+        const chatroomName = req.params.chatroomName;
+        const messages = await messageService.listAllMessages(username, chatroomName);
+        res.json(messages);
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
+module.exports = { createMessage, listAllMessages };
