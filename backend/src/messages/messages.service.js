@@ -18,5 +18,13 @@ const updateMessage = async (query, content) => {
     return updatedMessage;
 }
 
+const deleteMessage = async(messageId) => {
+    const deletedMessage = await Message.findByIdAndDelete(messageId);
+    if(!deletedMessage) {
+        throw new Error('Message not found or delete failed');
+    }
+    return deletedMessage;
+}
 
-module.exports = { createMessage, listAllMessages, updateMessage }
+
+module.exports = { createMessage, listAllMessages, updateMessage, deleteMessage }

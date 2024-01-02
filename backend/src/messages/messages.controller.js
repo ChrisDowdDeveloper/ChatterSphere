@@ -34,5 +34,14 @@ const updateMessage = async(req, res) => {
     }
 }
 
+const deleteMessage = async(req, res) => {
+    try {
+        const deletedMessage = await messageService.deleteMessage(req.params);
+        res.status(200).json(deletedMessage);
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    }
+}
 
-module.exports = { createMessage, listAllMessages, updateMessage };
+
+module.exports = { createMessage, listAllMessages, updateMessage, deleteMessage };
