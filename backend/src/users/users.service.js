@@ -11,7 +11,7 @@ const findUserByUsername = async (username) => {
 }
 
 const updateUser = async (username, userData) => {
-    return await User.findOneAndUpdate(username, userData);
+    return await User.findOneAndUpdate(username, userData, { new: true });
 }
 
 const deleteUser = async (username) => {

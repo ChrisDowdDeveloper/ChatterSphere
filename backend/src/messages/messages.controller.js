@@ -23,4 +23,16 @@ const listAllMessages = async(req, res) => {
     }
 }
 
-module.exports = { createMessage, listAllMessages };
+const updateMessage = async(req, res) => {
+    try {
+        const messageId = req.params;
+        const content = { ...req.body };
+        const updatedMessage = await messageService.updateMessage({ _id: messageId }, content);
+        res.status(200).json(updatedMessage);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
+
+module.exports = { createMessage, listAllMessages, updateMessage };
