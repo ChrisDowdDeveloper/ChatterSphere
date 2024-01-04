@@ -1,4 +1,4 @@
-const UserModel = require('../models/user');
+const UserModel = require('../users/users.model');
 
 const findId = async(credentials) => {
     try {
