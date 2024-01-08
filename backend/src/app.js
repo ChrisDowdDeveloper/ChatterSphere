@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const usersRouter = require('./users/users.router');
 const chatroomRouter = require('./chatroom/chatroom.router');
@@ -10,6 +11,7 @@ const redisRouter = require('./redis/redis.router');
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 app.use('/users', usersRouter);
 app.use('/users/:username/chatrooms', chatroomRouter);
 app.use('/users/:username/chatroom/:chatroomName/messages', messageRouter);
