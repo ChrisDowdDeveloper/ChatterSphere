@@ -1,10 +1,12 @@
 <script setup>
     import { ref } from 'vue';
-    import { login } from '@/services/api';
+    import { createUser } from '@/services/api';
+    import { useRouter } from 'vue-router';
 
     const username = ref('');
     const email = ref('');
     const password = ref('');
+    const router = useRouter();
 
     async function submit() {
         const credentials = {
@@ -15,7 +17,7 @@
         try {
             const response = await createUser(credentials);
             if(response) {
-                console.log("Success");
+                router.push({ name: 'dashboard', params: { username: credentials.username } });
             }
         } catch(err) {
             console.error("API Error: ", err);

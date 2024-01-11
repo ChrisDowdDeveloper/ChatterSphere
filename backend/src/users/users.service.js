@@ -6,8 +6,12 @@ const createUser = async (userData) => {
     return user;
 };
 
-const findUserByUsername = async (username) => {
+const read = async (username) => {
     return await User.findOne({ username });
+}
+
+const readEmail = async(email) => {
+    return await User.findOne({ email });
 }
 
 const updateUser = async (username, userData) => {
@@ -18,4 +22,4 @@ const deleteUser = async (username) => {
     return await User.findOneAndDelete({ username });
 }
 
-module.exports = { createUser, findUserByUsername, updateUser, deleteUser };
+module.exports = { createUser, read, readEmail, updateUser, deleteUser };
