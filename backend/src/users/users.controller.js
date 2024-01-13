@@ -62,35 +62,35 @@ function validatePassword(req, res, next) {
   }
   
 
-const userExists = (req, res, next) => {
-    const { username } = req.body.username;
-    const user = userService.read(username);
+const userExists = async (req, res, next) => {
+    const { username } = req.body;
+    const user = await userService.read(username);
     if(user) {
         res.locals.users = user;
         return next();
     }
-    throw {
-        status: 404,
+    next({
+        status: 400,
         message: `${username} not found`
-    }; 
+    }); 
 }
 
 const passwordMatch = async(req, res, next) => {
     let password = req.body.password;
     const userRetrieved = await userService.readPassword(req.body.username);
-    console.log(userRetrieved);
     if(password === userRetrieved.password) {
         return next();
     }
-    throw {
-            status: 400, 
-            message: `Password was incorrect`
-        }
+    next({
+        status: 400, 
+        message: `Password was incorrect`
+    })
 }
 
 // CRUD functions
 
 const createUser = async(req, res) => {
+    console.log(req.body);
     try {
         const user = await userService.createUser(req.body);
         res.status(201).json(user);

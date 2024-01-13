@@ -1,18 +1,34 @@
 <script>
-    import { fetchUser } from '@/services/api';
-    const fetchDashboard = async(username) => {
-        try {
-            
-        } catch (error) {
-            
-        }
-    }
+  import { onMounted, reactive, watchEffect } from 'vue';
+  import { fetchChatrooms } from '../services/api'
+
+  export default {
+  setup() {
+    const dashboardData = reactive({
+      chatrooms: []
+    });
+
+    onMounted(async () => {
+      dashboardData.chatrooms = await fetchChatrooms();
+    });
+
+    return {
+      dashboardData
+    };
+  }
+};
+
 </script>
 <template>
     <div>
-      <h1>{{ title }}</h1>
+      <h1>Chatrooms</h1>
       <ul>
-        <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+        <div> 
+          <li v-for="chatroom in dashboardData.chatrooms" :key="chatroom.chatroomId">
+            {{ chatroom.chatroomName }}
+            <button @click="joinChatroom">join</button>
+          </li>
+        </div>
       </ul>
     </div>
 </template>
