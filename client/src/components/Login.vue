@@ -1,18 +1,18 @@
 <script setup>
     import { ref } from 'vue';
     import { login } from '../services/api';
+    import { useRouter } from 'vue-router';
 
     const username = ref('');
     const password = ref('');
+    const router = useRouter();
 
     const submit = async() => {
-        const router = useRouter();
+        
         try {
             const response = await login(username.value, password.value);
             if(response) {
-                if(response) {
-                router.push({ path: `/${username}/dashboard` });
-            }
+                router.push({ name: 'dashboard', params: { username: username.value } });
             } else {
                 console.log('wrong')
             }

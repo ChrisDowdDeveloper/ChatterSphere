@@ -2,8 +2,8 @@ const express = require('express');
 const userController = require('./users.controller');
 const router = express.Router();
 
-router.post('/', userController.createUser);
-router.get('/:username', userController.getUserByUsername);
+router.post('/create', userController.createUser);
+router.post('/login', userController.loginUser);
 router.put('/:username', userController.updateUser);
 router.delete('/:username', userController.deleteUser);
 

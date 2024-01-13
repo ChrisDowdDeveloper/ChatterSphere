@@ -14,7 +14,8 @@ export const createUser = async(credentials) => {
 
 export const login = async(userEmail, password) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/users/${userEmail}`, password )
+        const credentials = { username: userEmail, password: password };
+        const response = await axios.post(`${API_BASE_URL}/users/login`, credentials )
         return response.data;
     } catch(err) {
         throw err;

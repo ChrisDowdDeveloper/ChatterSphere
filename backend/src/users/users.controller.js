@@ -63,7 +63,7 @@ function validatePassword(req, res, next) {
   
 
 const userExists = (req, res, next) => {
-    const { username } = req.params;
+    const { username } = req.body.username;
     const user = userService.read(username);
     if(user) {
         res.locals.users = user;
@@ -72,7 +72,20 @@ const userExists = (req, res, next) => {
     throw {
         status: 404,
         message: `${username} not found`
-    };
+    }; 
+}
+
+const passwordMatch = async(req, res, next) => {
+    let password = req.body.password;
+    const userRetrieved = await userService.readPassword(req.body.username);
+    console.log(userRetrieved);
+    if(password === userRetrieved.password) {
+        return next();
+    }
+    throw {
+            status: 400, 
+            message: `Password was incorrect`
+        }
 }
 
 // CRUD functions
@@ -86,9 +99,10 @@ const createUser = async(req, res) => {
     };
 };
 
-const getUserByUsername = async (req, res) => {
+const loginUser = async (req, res) => {
+    let username = req.body.username;
     try {
-        const user = await userService.findUserByUsername(req.params.username);
+        const user = await userService.read(username);
         if(!user) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -124,9 +138,10 @@ module.exports = {
         validatePassword,
         asyncErrorBoundary(createUser)
     ], 
-    getUserByUsername: [
+    loginUser: [
         userExists,
-        asyncErrorBoundary(getUserByUsername)
+        passwordMatch,
+        asyncErrorBoundary(loginUser)
     ], 
     updateUser, 
     deleteUser
