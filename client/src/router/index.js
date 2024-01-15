@@ -16,14 +16,19 @@ const router = createRouter({
       component: CreateAccountView
     },
     {
-      path: '/dashboard/:username',
+      path: '/:username/dashboard',
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue')
+      path: '/:username/profile',
+      name: 'profile',
+      component: () => import('../views/ProfileView.vue')
+    },
+    {
+      path: '/:username/logout',
+      name: 'logout',
+      component: () => import('../views/LogoutView')
     }
   ]
 })
