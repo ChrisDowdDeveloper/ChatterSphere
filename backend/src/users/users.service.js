@@ -6,7 +6,7 @@ const createUser = async (userData) => {
     return user;
 };
 
-const read = async (username) => {
+const read = async(username) => {
     return await User.findOne({ username });
 }
 
@@ -18,11 +18,11 @@ const readPassword = async(username) => {
     return await User.findOne({ username });
 }
 
-const updateUser = async (username, userData) => {
+const updateUser = async(username, userData) => {
     return await User.findOneAndUpdate(username, userData, { new: true });
 }
 
-const deleteUser = async (username) => {
+const deleteUser = async(username) => {
     return await User.findOneAndDelete({ username });
 }
 

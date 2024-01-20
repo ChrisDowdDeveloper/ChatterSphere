@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import ExistingUser from './ExistingUser';
 import { login } from "../../service/api";
 import { useNavigate } from 'react-router-dom';
 
@@ -36,11 +35,29 @@ const Login = () => {
             <div>
                 <img src="../icon/Chattersphere-logos_transparent.png"/>
             </div>
-            <ExistingUser 
-                handleChange={handleChange} 
-                handleSubmit={handleSubmit}
-                form={form}
-            />
+            <form>
+                <div>
+                    <label>Username</label>
+                    <input 
+                        name="username"
+                        type="text"
+                        value={form.username || ""}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input 
+                        name="password"
+                        type="password"
+                        value={form.password || ""}
+                        onChange={handleChange}
+                    />
+                </div>
+                <button onClick={handleSubmit}>
+                    Login
+                </button>
+            </form>
         </div>
     );
 }

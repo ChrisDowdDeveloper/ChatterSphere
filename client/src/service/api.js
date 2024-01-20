@@ -31,6 +31,16 @@ export const fetchUser = async() => {
     }
 }
 
+export const fetchUserByUsername = async(username) => {
+    try {
+        console.log(username);
+       const response = await axios.get(`${API_BASE_URL}/users/${username}`);
+       return response.data;
+    } catch (err) {
+        throw err
+    }
+}
+
 export const fetchChatrooms = async() => {
     try {
         const response = await axios.get(`${API_BASE_URL}/chatrooms`);

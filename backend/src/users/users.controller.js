@@ -112,6 +112,16 @@ const loginUser = async (req, res) => {
     };
 };
 
+const getUser = async(req, res) => {
+    const username = req.params.username;
+    try {
+        const user = await userService.read(username);
+        res.json(user);
+    } catch(e) {
+        res.status(400).json({ message: e.message });
+    }
+}
+
 const updateUser = async(req, res) => {
     try {
         const query = { username: req.params.username }
@@ -143,6 +153,9 @@ module.exports = {
         passwordMatch,
         asyncErrorBoundary(loginUser)
     ], 
+    getUser: [
+        asyncErrorBoundary(getUser)
+    ],
     updateUser, 
     deleteUser
 };  
