@@ -18,6 +18,16 @@ const listChatrooms = async (req, res) => {
     };
 };
 
+const listAvailableChatrooms = async(req, res) => {
+    const userId = req.body.userId;
+    try {
+        const chatrooms = await chatroomService.listAvailableChatrooms(userId);
+        res.json(chatrooms);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
 const listParticipants = async(req, res) => {
     try {
         const chatroomParticipants = await chatroomService.listParticipants(req.query.chatroomName);
@@ -43,6 +53,7 @@ const deleteChatroom = async(req, res) => {
 module.exports = { 
     createChatroom, 
     listChatrooms, 
+    listAvailableChatrooms,
     listParticipants, 
     deleteChatroom,
 };  

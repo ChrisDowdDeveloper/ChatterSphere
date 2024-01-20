@@ -15,6 +15,14 @@ const listChatrooms = async () => {
     return await Chatroom.find();
 }
 
+const listAvailableChatrooms = async(userId) => {
+    let chatrooms = await Chatroom.find({
+        participants: { $nin: [userId] }
+    });
+
+    return chatrooms;
+}
+
 const listParticipants = async (chatroomName) => {
     const chatroom = await Chatroom.findOne({ chatroomName: chatroomName }).populate('participants');
     return chatroom ? chatroom.participants : [];
@@ -25,4 +33,4 @@ const deleteChatroom = async (chatroomName) => {
 }
 
 
-module.exports = { getChatroomId, createChatroom, listChatrooms, listParticipants, deleteChatroom };
+module.exports = { getChatroomId, createChatroom, listChatrooms, listAvailableChatrooms, listParticipants, deleteChatroom };

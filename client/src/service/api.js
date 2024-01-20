@@ -33,7 +33,6 @@ export const fetchUser = async() => {
 
 export const fetchUserByUsername = async(username) => {
     try {
-        console.log(username);
        const response = await axios.get(`${API_BASE_URL}/users/${username}`);
        return response.data;
     } catch (err) {
@@ -46,6 +45,17 @@ export const fetchChatrooms = async() => {
         const response = await axios.get(`${API_BASE_URL}/chatrooms`);
         return response.data;
     } catch(err) {
+        throw err;
+    }
+}
+
+export const fetchAvailableChatrooms = async(user) => {
+    const username = user.username;
+    const userId = user._id; 
+    try {
+        const response = await axios.get(`${API_BASE_URL}/chatrooms/${username}`, userId);
+        return response.data;
+    } catch (err) {
         throw err;
     }
 }
