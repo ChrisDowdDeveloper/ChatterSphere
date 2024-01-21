@@ -32,5 +32,13 @@ const deleteChatroom = async (chatroomName) => {
     return await Chatroom.findOneAndDelete({ chatroomName: chatroomName });
 }
 
+const listJoinedChatrooms = async(userId) => {
+    const chatroom = await Chatroom.find({
+        participants: userId
+    });
 
-module.exports = { getChatroomId, createChatroom, listChatrooms, listAvailableChatrooms, listParticipants, deleteChatroom };
+    return chatroom;
+}
+
+
+module.exports = { getChatroomId, createChatroom, listChatrooms, listAvailableChatrooms, listParticipants, deleteChatroom, listJoinedChatrooms };

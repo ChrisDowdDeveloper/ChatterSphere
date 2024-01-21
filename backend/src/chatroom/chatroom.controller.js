@@ -50,10 +50,21 @@ const deleteChatroom = async(req, res) => {
     };
 };
 
+const listJoinedChatrooms = async(req, res) => {
+    const userId = req.body.userId;
+    try {
+        const joinedChatrooms = await chatroomService.listJoinedChatrooms(userId);
+        res.json(joinedChatrooms);
+    } catch (e) {
+        res.status(500).json({ message: e.message });
+    }
+}
+
 module.exports = { 
     createChatroom, 
     listChatrooms, 
     listAvailableChatrooms,
     listParticipants, 
     deleteChatroom,
+    listJoinedChatrooms
 };  
