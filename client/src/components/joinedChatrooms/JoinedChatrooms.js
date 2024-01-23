@@ -6,16 +6,18 @@ const JoinedChatrooms = ({ user }) => {
 
     useEffect(() => {
         const fetchChatrooms = async() => {
-            try {
-                let data = await joinedChatrooms(user.username, user._id);
-                setChatrooms(data);
-            } catch(err) {
-                console.error(err);
+            if (user && user._id) { 
+                try {
+                    let data = await joinedChatrooms(user._id);
+                    setChatrooms(data);
+                } catch(err) {
+                    console.error(err);
+                }
             }
         }
 
         fetchChatrooms();
-    }, []);
+    }, [user?._id]);
 
     function availableChatrooms() {
         return (

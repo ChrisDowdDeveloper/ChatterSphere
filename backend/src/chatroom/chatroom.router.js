@@ -6,9 +6,10 @@ router.post('/', chatroomController.createChatroom);
 router.get('/', chatroomController.listChatrooms);
 
 router.get('/:username', chatroomController.listAvailableChatrooms);
-router.get('/:username/joined', chatroomController.listJoinedChatrooms);
 
-router.get('/:chatroomName', chatroomController.listParticipants);
-router.delete('/:chatroomName', chatroomController.deleteChatroom);
+router.get('/:_id', chatroomController.listParticipants);
+router.post('/:_id', chatroomController.joinChatroom);
+router.delete('/:_id', chatroomController.deleteChatroom);
 
+router.get('/:userId/joined', chatroomController.listJoinedChatrooms);
 module.exports = router;

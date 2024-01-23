@@ -51,11 +51,22 @@ const deleteChatroom = async(req, res) => {
 };
 
 const listJoinedChatrooms = async(req, res) => {
-    const userId = req.body.userId;
+    console.log(req.params);
     try {
         const joinedChatrooms = await chatroomService.listJoinedChatrooms(userId);
         res.json(joinedChatrooms);
     } catch (e) {
+        res.status(500).json({ message: e.message });
+    }
+}
+
+const joinChatroom = async(req, res) => {
+    const chatroomId = req.params;
+    const userId = req.body.userId;
+    try {
+        const userAdded = await chatroomService.addUser(chatroomId, userId);
+        res.json(userAdded);
+    } catch(e) {
         res.status(500).json({ message: e.message });
     }
 }
@@ -66,5 +77,6 @@ module.exports = {
     listAvailableChatrooms,
     listParticipants, 
     deleteChatroom,
-    listJoinedChatrooms
+    listJoinedChatrooms,
+    joinChatroom
 };  

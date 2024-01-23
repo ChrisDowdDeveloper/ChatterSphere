@@ -3,8 +3,6 @@ import axios from 'axios';
 const API_BASE_URL = "http://localhost:8080";
 
 export const createUser = async(credentials) => {
-    console.log("submit called");
-    console.log(credentials);
     try {
         const response = await axios.post(`${API_BASE_URL}/users/create`, credentials);
         return response.data;
@@ -60,9 +58,19 @@ export const fetchAvailableChatrooms = async(user) => {
     }
 }
 
-export const joinedChatrooms = async(username, userId) => {
+export const joinedChatrooms = async(userId) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/chatrooms/${username}/joined`, userId);
+        console.log(userId);
+        const response = await axios.get(`${API_BASE_URL}/chatrooms/${userId}/joined`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export const joinAvailableChatroom = async(chatroomId, userId) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/chatrooms/${chatroomId}`, { "userId": userId });
         return response.data;
     } catch (err) {
         throw err;

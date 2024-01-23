@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchAvailableChatrooms } from "../../service/api";
+import { fetchAvailableChatrooms, joinAvailableChatroom } from "../../service/api";
 
 const AvailableChatrooms = ({ user }) => {
     const [chatrooms, setChatrooms] = useState([]);
@@ -17,6 +17,14 @@ const AvailableChatrooms = ({ user }) => {
         fetchChatrooms();
     }, []);
 
+    const handleClick = async(chatroomId) => {
+        try {
+            await joinAvailableChatroom(chatroomId, user._id);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     return (
         <div>
             <ul>
@@ -24,7 +32,7 @@ const AvailableChatrooms = ({ user }) => {
                     <li key={chatroom._id}>
                         <p>{chatroom.chatroomName}</p>
                         <p>Participants: {chatroom.participants}</p>
-                        <button>Join</button>
+                        <button onClick={() => handleClick(chatroom._id)}>Join</button>
                     </li>
                 ))}
             </ul>

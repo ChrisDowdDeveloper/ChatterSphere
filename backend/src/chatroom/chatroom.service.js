@@ -2,7 +2,6 @@ const Chatroom = require('./chatroom.model');
 
 const getChatroomId = async(chatroomName) => {
     const chatroom = Chatroom(chatroomName);
-    console.log(chatroom._id)
 }
 
 const createChatroom = async (chatroomData) => {
@@ -33,12 +32,21 @@ const deleteChatroom = async (chatroomName) => {
 }
 
 const listJoinedChatrooms = async(userId) => {
-    const chatroom = await Chatroom.find({
+    const chatrooms = await Chatroom.find({
         participants: userId
     });
 
-    return chatroom;
+    return chatrooms;
+}
+
+const addUser = async(chatroomId, userId) => {
+    const chatroom = await Chatroom.findById(chatroomId);
+    if(!chatroom.participants.includes(userId)) {
+        chatroom.participants.push(userId);
+        await chatroom.save();
+        return chatroom;
+    }
 }
 
 
-module.exports = { getChatroomId, createChatroom, listChatrooms, listAvailableChatrooms, listParticipants, deleteChatroom, listJoinedChatrooms };
+module.exports = { getChatroomId, createChatroom, listChatrooms, listAvailableChatrooms, listParticipants, deleteChatroom, listJoinedChatrooms, addUser };

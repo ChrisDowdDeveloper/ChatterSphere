@@ -90,7 +90,6 @@ const passwordMatch = async(req, res, next) => {
 // CRUD functions
 
 const createUser = async(req, res) => {
-    console.log(req.body);
     try {
         const user = await userService.createUser(req.body);
         res.status(201).json(user);
