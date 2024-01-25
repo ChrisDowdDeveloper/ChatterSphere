@@ -19,7 +19,7 @@ const JoinedChatrooms = ({ user }) => {
         fetchChatrooms();
     }, [user?._id]);
 
-    function availableChatrooms() {
+    function availableChatrooms(chatrooms) {
         return (
             <ul>
                 {chatrooms.map(chatroom => (
@@ -34,7 +34,7 @@ const JoinedChatrooms = ({ user }) => {
 
     return (
         <div>
-            {chatrooms.length < 0 ? availableChatrooms() : <p>You are not apart of any chatrooms yet!</p>}
+            {chatrooms.length > 0 ? availableChatrooms(chatrooms) : <p>You are not apart of any chatrooms yet!</p>}
         </div>
     );
 }

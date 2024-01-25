@@ -60,7 +60,6 @@ export const fetchAvailableChatrooms = async(user) => {
 
 export const joinedChatrooms = async(userId) => {
     try {
-        console.log(userId);
         const response = await axios.get(`${API_BASE_URL}/chatrooms/${userId}/joined`);
         return response.data;
     } catch (err) {

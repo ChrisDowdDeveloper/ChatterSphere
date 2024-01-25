@@ -51,7 +51,7 @@ const deleteChatroom = async(req, res) => {
 };
 
 const listJoinedChatrooms = async(req, res) => {
-    console.log(req.params);
+    const userId = req.params.userId;
     try {
         const joinedChatrooms = await chatroomService.listJoinedChatrooms(userId);
         res.json(joinedChatrooms);

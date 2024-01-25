@@ -1,4 +1,5 @@
 const Chatroom = require('./chatroom.model');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 const getChatroomId = async(chatroomName) => {
     const chatroom = Chatroom(chatroomName);
@@ -16,11 +17,11 @@ const listChatrooms = async () => {
 
 const listAvailableChatrooms = async(userId) => {
     let chatrooms = await Chatroom.find({
-        participants: { $nin: [userId] }
+        participants: { $nin: new ObjectId(userId) }
     });
 
     return chatrooms;
-}
+};
 
 const listParticipants = async (chatroomName) => {
     const chatroom = await Chatroom.findOne({ chatroomName: chatroomName }).populate('participants');
