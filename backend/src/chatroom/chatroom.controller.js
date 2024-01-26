@@ -71,6 +71,17 @@ const joinChatroom = async(req, res) => {
     }
 }
 
+const leaveChatroom = async(req, res) => {
+    const chatroomId = req.params._id;
+    const userId = req.params.userId;
+    try {
+        const leftChat = await chatroomService.leaveChatroom(chatroomId, userId);
+        res.json(leftChat);
+    } catch(e) {
+        res.status(500).json({ message: e.message });
+    }
+}
+
 module.exports = { 
     createChatroom, 
     listChatrooms, 
@@ -78,5 +89,6 @@ module.exports = {
     listParticipants, 
     deleteChatroom,
     listJoinedChatrooms,
-    joinChatroom
+    joinChatroom,
+    leaveChatroom
 };  

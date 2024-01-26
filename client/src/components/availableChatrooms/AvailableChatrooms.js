@@ -27,7 +27,10 @@ const AvailableChatrooms = ({ user }) => {
 
     const handleClick = async(chatroomId) => {
         try {
-            await joinAvailableChatroom(chatroomId, user._id);
+            const response = await joinAvailableChatroom(chatroomId, user._id);
+            if(response) {
+                window.location.reload();
+            }
         } catch (err) {
             console.error(err);
         }

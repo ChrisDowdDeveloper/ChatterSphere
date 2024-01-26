@@ -49,5 +49,23 @@ const addUser = async(chatroomId, userId) => {
     }
 }
 
+const leaveChatroom = async(chatroomId, userId) => {
+    const chatroom = await Chatroom.findById(chatroomId);
+    if(chatroom.participants.includes(userId)) {
+        await Chatroom.updateOne({ _id: chatroomId }, { $pull: { participants: userId } });
+        return chatroom;
+    }
+}
 
-module.exports = { getChatroomId, createChatroom, listChatrooms, listAvailableChatrooms, listParticipants, deleteChatroom, listJoinedChatrooms, addUser };
+
+module.exports = { 
+    getChatroomId, 
+    createChatroom, 
+    listChatrooms, 
+    listAvailableChatrooms, 
+    listParticipants, 
+    deleteChatroom, 
+    listJoinedChatrooms, 
+    addUser,
+    leaveChatroom,
+};

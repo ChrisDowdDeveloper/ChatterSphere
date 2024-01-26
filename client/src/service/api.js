@@ -75,3 +75,12 @@ export const joinAvailableChatroom = async(chatroomId, userId) => {
         throw err;
     }
 }
+
+export const leaveChatroom = async(chatroomId, userId) => {
+    try {
+        const response = await axios.delete(`${API_BASE_URL}/chatrooms/${chatroomId}/${userId}`);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}

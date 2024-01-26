@@ -11,5 +11,8 @@ router.get('/:_id', chatroomController.listParticipants);
 router.post('/:_id', chatroomController.joinChatroom);
 router.delete('/:_id', chatroomController.deleteChatroom);
 
+router.delete('/:_id/:userId', chatroomController.leaveChatroom);
+
 router.get('/:userId/joined', chatroomController.listJoinedChatrooms);
+
 module.exports = router;
