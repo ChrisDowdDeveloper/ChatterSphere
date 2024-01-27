@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/login/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import Messages from './components/messages/Messages';
 
 function App() {
   return (
@@ -14,6 +15,10 @@ function App() {
         <Route
           path='/:username/dashboard'
           element={<Dashboard />}
+        />
+        <Route 
+          path='/:username/:chatroomName'
+          element={<Messages />}
         />
       </Routes>
     </BrowserRouter>

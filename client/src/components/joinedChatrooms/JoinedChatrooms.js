@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { joinedChatrooms, leaveChatroom } from "../../service/api";
+import { useNavigate } from 'react-router-dom';
 
 const JoinedChatrooms = ({ user }) => {
     const [chatrooms, setChatrooms] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchChatrooms = async() => {
@@ -37,6 +39,7 @@ const JoinedChatrooms = ({ user }) => {
                     <li key={chatroom._id}>
                         {chatroom.chatroomName}
                         <button onClick={() => handleClick(chatroom._id, user)}>Leave Chatroom</button>
+                        <button onClick={() => navigate(`/${user.username}/${chatroom.chatroomName}`)}>View Messages</button>
                     </li>
                 ))}
             </ul>

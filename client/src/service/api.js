@@ -84,3 +84,11 @@ export const leaveChatroom = async(chatroomId, userId) => {
         throw err;
     }
 }
+
+export const fetchMessages = async(chatroomName) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/messsages`)
+    } catch (err) {
+        throw err;
+    }
+}
