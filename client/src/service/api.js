@@ -85,9 +85,10 @@ export const leaveChatroom = async(chatroomId, userId) => {
     }
 }
 
-export const fetchMessages = async(chatroomName) => {
+export const getMessages = async(chatroomId) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/messsages`)
+        const response = await axios.get(`${API_BASE_URL}/messages/${chatroomId}`)
+        return response.data;
     } catch (err) {
         throw err;
     }

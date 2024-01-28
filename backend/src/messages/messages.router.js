@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/', messageController.createMessage);
 router.get('/', messageController.listAllMessages);
-router.get('/:chatroomName')
+router.get('/:chatroomId', messageController.listMessagesByChatroom);
 router.put('/:_id', messageController.updateMessage);
 router.delete('/:_id', messageController.deleteMessage);
 

@@ -26,5 +26,13 @@ const deleteMessage = async(messageId) => {
     return deletedMessage;
 }
 
+const listMessagesByChatroom = async(chatroomId) => {
+    const messages = await Message.find({
+        chatroomId: chatroomId
+    })  
+    console.log(messages);
+    return messages;
+}
 
-module.exports = { createMessage, listAllMessages, updateMessage, deleteMessage }
+
+module.exports = { createMessage, listAllMessages, listMessagesByChatroom, updateMessage, deleteMessage }

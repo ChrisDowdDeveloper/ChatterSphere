@@ -39,7 +39,7 @@ const JoinedChatrooms = ({ user }) => {
                     <li key={chatroom._id}>
                         {chatroom.chatroomName}
                         <button onClick={() => handleClick(chatroom._id, user)}>Leave Chatroom</button>
-                        <button onClick={() => navigate(`/${user.username}/${chatroom.chatroomName}`)}>View Messages</button>
+                        <button onClick={() => navigate(`/${user.username}/${chatroom.chatroomName}`, { state: { chatroom } })}>View Messages</button>
                     </li>
                 ))}
             </ul>

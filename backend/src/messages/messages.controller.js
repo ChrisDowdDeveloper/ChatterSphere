@@ -23,6 +23,16 @@ const listAllMessages = async(req, res) => {
     }
 }
 
+const listMessagesByChatroom = async(req, res) => {
+    try {
+        const chatroomId = req.params.chatroomId;
+        const messages = await messageService.listMessagesByChatroom(chatroomId);
+        res.json(messages);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
 const updateMessage = async(req, res) => {
     try {
         const messageId = req.params;
@@ -44,4 +54,10 @@ const deleteMessage = async(req, res) => {
 }
 
 
-module.exports = { createMessage, listAllMessages, updateMessage, deleteMessage };
+module.exports = { 
+    createMessage, 
+    listAllMessages, 
+    listMessagesByChatroom,
+    updateMessage, 
+    deleteMessage 
+};
