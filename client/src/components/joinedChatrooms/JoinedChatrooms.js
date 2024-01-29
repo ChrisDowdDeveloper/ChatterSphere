@@ -24,8 +24,8 @@ const JoinedChatrooms = ({ user }) => {
     const handleClick = async(chatroomId, user) => {
         try {
             const response = await leaveChatroom(chatroomId, user._id);
-            if(response) {
-                window.location.reload();
+            if(response === 200) {
+                setChatrooms(prevChatrooms => prevChatrooms.filter(chatroom => chatroom._id !== chatroomId));
             }
         } catch (err) {
             console.error(err);
@@ -39,7 +39,7 @@ const JoinedChatrooms = ({ user }) => {
                     <li key={chatroom._id}>
                         {chatroom.chatroomName}
                         <button onClick={() => handleClick(chatroom._id, user)}>Leave Chatroom</button>
-                        <button onClick={() => navigate(`/${user.username}/${chatroom.chatroomName}`, { state: { chatroom } })}>View Messages</button>
+                        <button onClick={() => navigate(`/${user.username}/${chatroom.chatroomName}`, { state: { chatroom, user } })}>View Messages</button>
                     </li>
                 ))}
             </ul>

@@ -93,3 +93,12 @@ export const getMessages = async(chatroomId) => {
         throw err;
     }
 }
+
+export const sendMessage = async(data, chatroomId) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/messages/${chatroomId}`, data);
+        return response.data;
+    } catch (err) {
+        throw err;
+    }
+}

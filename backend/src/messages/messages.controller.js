@@ -53,11 +53,24 @@ const deleteMessage = async(req, res) => {
     }
 }
 
+const createMessageByChatroomId = async(req, res) => {
+    try {
+        const chatroomId = req.params.chatroomId;
+        const userId = req.body.userId;
+        const content = req.body.content;
+        const createdMessage = await messageService.createMessageByChatroomId(chatroomId, userId, content);
+        res.status(201).json(createdMessage);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
 
 module.exports = { 
     createMessage, 
     listAllMessages, 
     listMessagesByChatroom,
     updateMessage, 
-    deleteMessage 
+    deleteMessage,
+    createMessageByChatroomId 
 };
