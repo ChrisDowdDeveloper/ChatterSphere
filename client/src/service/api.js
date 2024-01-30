@@ -102,3 +102,12 @@ export const sendMessage = async(data, chatroomId) => {
         throw err;
     }
 }
+
+export const deleteMessageById = async(messageId) => {
+    try {
+        const response = await axios.delete(`${API_BASE_URL}/messages/${messageId}`);
+        return response.data;
+    } catch(err) {
+        throw err;
+    }
+}

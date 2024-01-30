@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { getMessages,  sendMessage } from "../../service/api";
+import { deleteMessageById, getMessages,  sendMessage } from "../../service/api";
 
 const Messages = () => {
     const location = useLocation();
@@ -42,11 +42,23 @@ const Messages = () => {
         }
     }
 
+    const deleteMessage = async(messageId) => {
+        try {
+            await deleteMessageById(messageId);
+            const updatedMessages = await getMessages(chatroom._id);
+            setMessages(updatedMessages);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     return (
         <div>
             <ul>
                 {messages.map(message => (
-                    <li key={message._id}>{message.content}</li>
+                    <li key={message._id}>{message.content}
+                    {message.senderId === user._id ? <button onClick={() => deleteMessage(message._id)}>Delete</button> : null}
+                    </li>
                 ))}
             </ul>
             <div>
