@@ -57,6 +57,9 @@ const Login = () => {
                 <button onClick={handleSubmit}>
                     Login
                 </button>
+                <button onClick={() => navigate('/createAccount')}>
+                    Create Account
+                </button>
             </form>
         </div>
     );

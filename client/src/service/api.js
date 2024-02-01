@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const API_BASE_URL = "http://localhost:8080";
 
-export const createUser = async(credentials) => {
+export const createUser = async(userData) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/users/create`, credentials);
+        const response = await axios.post(`${API_BASE_URL}/users/create`, userData);
         return response.data;
     } catch(err) {
         throw err;
